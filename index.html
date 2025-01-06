@@ -42,19 +42,28 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
+    /* Hide non-visible pages */
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body class="bg-gray-100">
 
   <!-- Page 1: How to Solve a Quadratic Equation -->
-  <div class="page">
+  <div class="page" id="page1">
     <h1 class="text-3xl font-bold text-center mb-4">How to Solve a Quadratic Equation</h1>
-    <p>Here are the steps to solve a quadratic equation...</p>
-    <!-- Additional content can go here -->
+    <p>Here are the steps to solve a quadratic equation:</p>
+    <ul>
+      <li>Step 1: Move all terms to one side of the equation.</li>
+      <li>Step 2: Factor the quadratic expression.</li>
+      <li>Step 3: Solve for the value of x.</li>
+    </ul>
   </div>
 
   <!-- Page 2: Mini Exercises -->
-  <div class="page">
+  <div class="page hidden" id="page2">
     <h1 class="text-3xl font-bold text-center mb-4">Mini Exercises: Choose the correct answer</h1>
     <p>1. What is the value of x in the equation x² + 5x + 6 = 0?</p>
     <!-- Example Multiple Choice -->
@@ -68,7 +77,7 @@
   </div>
 
   <!-- Page 3: YouTube Video Embed (Flowplayer) -->
-  <div class="page">
+  <div class="page hidden" id="page3">
     <h1 class="text-3xl font-bold text-center mb-4">Watch the Solution Video</h1>
 
     <!-- Embed Flowplayer with YouTube video -->
@@ -96,9 +105,9 @@
       const pages = document.querySelectorAll('.page');
       pages.forEach((page, index) => {
         if (index + 1 === currentPage) {
-          page.style.display = 'block';
+          page.classList.remove('hidden');
         } else {
-          page.style.display = 'none';
+          page.classList.add('hidden');
         }
       });
     }
