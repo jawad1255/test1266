@@ -25,6 +25,7 @@
     .page {
       padding: 20px;
       margin-bottom: 20px;
+      transition: transform 0.5s ease;
     }
 
     /* Center align the swipe message */
@@ -49,6 +50,18 @@
     .exercise {
       margin-bottom: 20px;
     }
+
+    .question {
+      margin-bottom: 20px;
+    }
+
+    .wrong {
+      color: red;
+    }
+
+    .right {
+      color: green;
+    }
   </style>
 </head>
 <body class="bg-gray-100">
@@ -62,111 +75,79 @@
     </div>
   </div>
 
-  <!-- Page 2: Introduction to Linear Applications -->
+  <!-- Page 2: Multiple Choice Question -->
   <div class="page hidden" id="page2">
     <h1 class="text-3xl font-bold text-center mb-4">Chapter 1: Introduction to Linear Applications</h1>
-    <p>Linear applications are functions between vector spaces that preserve vector addition and scalar multiplication. Here we will explore how to define and work with them.</p>
-    <p>In this chapter, we will discuss transformations, matrices, and how to represent them with matrices.</p>
+    <p>Linear applications are functions between vector spaces that preserve vector addition and scalar multiplication.</p>
+
+    <div class="question">
+      <h2 class="text-xl font-semibold mb-2">Question 1: What is a linear application?</h2>
+      <div class="exercise">
+        <label>
+          <input type="radio" name="q1" value="a"> A function that changes the structure of a vector space
+        </label>
+      </div>
+      <div class="exercise">
+        <label>
+          <input type="radio" name="q1" value="b"> A function that preserves vector addition and scalar multiplication
+        </label>
+      </div>
+      <div class="exercise">
+        <label>
+          <input type="radio" name="q1" value="c"> A random function with no rules
+        </label>
+      </div>
+      <button onclick="submitMCQ('q1', 'b')">Submit Answer</button>
+      <p id="q1-feedback"></p>
+    </div>
   </div>
 
-  <!-- Page 3: 2x2 Matrices Introduction -->
+  <!-- Page 3: Another Multiple Choice Question -->
   <div class="page hidden" id="page3">
     <h1 class="text-3xl font-bold text-center mb-4">Chapter 2: Introduction to 2x2 Matrices</h1>
-    <p>A 2x2 matrix is a grid of numbers arranged in two rows and two columns. Matrices are essential in linear algebra because they represent linear transformations. Here is an example of a 2x2 matrix:</p>
+    <p>A 2x2 matrix is a grid of numbers arranged in two rows and two columns. Here is an example:</p>
     <pre> A = [ a  b ]
          [ c  d ] </pre>
+
+    <div class="question">
+      <h2 class="text-xl font-semibold mb-2">Question 2: What is the determinant of a 2x2 matrix?</h2>
+      <div class="exercise">
+        <label>
+          <input type="radio" name="q2" value="a"> ad - bc
+        </label>
+      </div>
+      <div class="exercise">
+        <label>
+          <input type="radio" name="q2" value="b"> a + d
+        </label>
+      </div>
+      <div class="exercise">
+        <label>
+          <input type="radio" name="q2" value="c"> ac - bd
+        </label>
+      </div>
+      <button onclick="submitMCQ('q2', 'a')">Submit Answer</button>
+      <p id="q2-feedback"></p>
+    </div>
   </div>
 
-  <!-- Page 4: Matrix Multiplication -->
+  <!-- Page 4: Submit Results -->
   <div class="page hidden" id="page4">
-    <h1 class="text-3xl font-bold text-center mb-4">Chapter 3: Matrix Multiplication</h1>
-    <p>Matrix multiplication involves taking the dot product of rows and columns. Let's consider multiplying two 2x2 matrices:</p>
-    <pre> A = [ a  b ]    B = [ e  f ]
-         [ c  d ]         [ g  h ] </pre>
-    <p>Resulting Matrix C = AB is:</p>
-    <pre> C = [ ae + bg  af + bh ]
-         [ ce + dg  cf + dh ] </pre>
-  </div>
-
-  <!-- Page 5: Example of Matrix Multiplication -->
-  <div class="page hidden" id="page5">
-    <h1 class="text-3xl font-bold text-center mb-4">Example: Matrix Multiplication</h1>
-    <p>Let's try an example with specific values:</p>
-    <pre> A = [ 1  2 ]
-         [ 3  4 ]   B = [ 5  6 ]
-                       [ 7  8 ] </pre>
-    <p>The result of A * B is:</p>
-    <pre> C = [ (1*5 + 2*7)  (1*6 + 2*8) ]
-         [ (3*5 + 4*7)  (3*6 + 4*8) ] </pre>
-    <p>Which gives:</p>
-    <pre> C = [ 19  22 ]
-         [ 43  50 ] </pre>
-  </div>
-
-  <!-- Page 6: Mini Exercises -->
-  <div class="page hidden" id="page6">
-    <h1 class="text-3xl font-bold text-center mb-4">Exercise 1: Solve the Matrix Multiplication</h1>
-    <p>Given the following matrices, calculate the result of multiplying A by B.</p>
-    <pre> A = [ 2  3 ]
-         [ 4  5 ]   B = [ 6  7 ]
-                       [ 8  9 ] </pre>
-    <div class="exercise">
-      <label>Answer (first row, first column): </label>
-      <input type="number" id="q1a">
-    </div>
-    <div class="exercise">
-      <label>Answer (first row, second column): </label>
-      <input type="number" id="q1b">
-    </div>
-    <div class="exercise">
-      <label>Answer (second row, first column): </label>
-      <input type="number" id="q1c">
-    </div>
-    <div class="exercise">
-      <label>Answer (second row, second column): </label>
-      <input type="number" id="q1d">
-    </div>
-    <button onclick="submitAnswers()">Submit Answers</button>
+    <h1 class="text-3xl font-bold text-center mb-4">Your Score</h1>
     <p id="score"></p>
-  </div>
-
-  <!-- Page 7: Solutions to Exercises -->
-  <div class="page hidden" id="page7">
-    <h1 class="text-3xl font-bold text-center mb-4">Solutions to Exercises</h1>
-    <p>After reviewing your answers, here is the correct result:</p>
-    <pre> C = [ 56  62 ]
-         [ 64  73 ] </pre>
-  </div>
-
-  <!-- Page 8: Linear Transformations -->
-  <div class="page hidden" id="page8">
-    <h1 class="text-3xl font-bold text-center mb-4">Chapter 4: Linear Transformations</h1>
-    <p>Linear transformations are mappings between vector spaces that preserve the operations of vector addition and scalar multiplication. We will explore these transformations with matrices.</p>
-  </div>
-
-  <!-- Page 9: Applications of Linear Transformations -->
-  <div class="page hidden" id="page9">
-    <h1 class="text-3xl font-bold text-center mb-4">Chapter 5: Applications of Linear Transformations</h1>
-    <p>Linear transformations have a wide range of applications, including in computer graphics, physics, and economics. In this chapter, we will examine some key applications.</p>
-  </div>
-
-  <!-- Page 10: Conclusion -->
-  <div class="page hidden" id="page10">
-    <h1 class="text-3xl font-bold text-center mb-4">Conclusion</h1>
-    <p>Linear algebra and matrices are foundational in mathematics. This book has covered essential topics like linear applications, matrix operations, and linear transformations. Continue exploring more advanced topics!</p>
   </div>
 
   <!-- Swipe Message to Next Page -->
   <div class="swipe-message" onclick="nextPage()">Swipe or click to go to next page</div>
 
-  <!-- Script to navigate between pages and submit answers -->
+  <!-- Script to navigate between pages and multiple choice question -->
   <script>
     let currentPage = 1;
     let score = 0;
 
     function nextPage() {
       currentPage++;
-      if (currentPage > 10) currentPage = 1;  // Loop back to the first page
+      if (currentPage > 4) currentPage = 1;  // Loop back to the first page
       updatePageVisibility();
     }
 
@@ -181,23 +162,24 @@
       });
     }
 
-    function submitAnswers() {
-      let q1a = parseInt(document.getElementById('q1a').value);
-      let q1b = parseInt(document.getElementById('q1b').value);
-      let q1c = parseInt(document.getElementById('q1c').value);
-      let q1d = parseInt(document.getElementById('q1d').value);
+    function submitMCQ(question, correctAnswer) {
+      const selectedAnswer = document.querySelector(`input[name="${question}"]:checked`);
 
-      // Correct answers for the multiplication of A and B
-      let correctAnswers = [56, 62, 64, 73];
+      if (!selectedAnswer) {
+        alert("Please select an answer");
+        return;
+      }
 
-      score = 0;
+      const feedbackElement = document.getElementById(`${question}-feedback`);
+      if (selectedAnswer.value === correctAnswer) {
+        score++;
+        feedbackElement.innerHTML = `<span class="right">Correct!</span>`;
+      } else {
+        feedbackElement.innerHTML = `<span class="wrong">Wrong! The correct answer is: ${correctAnswer}</span>`;
+      }
 
-      if (q1a === correctAnswers[0]) score++;
-      if (q1b === correctAnswers[1]) score++;
-      if (q1c === correctAnswers[2]) score++;
-      if (q1d === correctAnswers[3]) score++;
-
-      document.getElementById('score').innerText = "Your score is: " + score + "/4";
+      // Proceed to the next page after a small delay
+      setTimeout(nextPage, 1500);
     }
 
     // Initial setup: Show the first page
